@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import CardList from "../views/CardList.vue";
 import AddCardForm from "../views/AddCardForm.vue";
 import CardInfo from "../views/CardInfo.vue";
+import OrderForm from "../components/OrderForm.vue"
 const routes = [
     {
         path: '/',
@@ -13,6 +14,11 @@ const routes = [
         path: '/addCard',
         name: 'AddCardForm',
         component: AddCardForm
+    },
+    {
+        path: '/addOrder',
+        name: 'OrderForm',
+        component: OrderForm
     },
     {
         path: '/cards/:id',

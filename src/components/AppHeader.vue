@@ -3,6 +3,7 @@
         <nav  class="headerNav">
           <RouterLink to="/" class="headerLink" >Список товаров</RouterLink>
           <RouterLink to="/addCard" class="headerLink">Добавить товар</RouterLink>
+          <RouterLink to="/addOrder" class="headerLink">Форма заказа</RouterLink>
         </nav>
     </header>
 </template>

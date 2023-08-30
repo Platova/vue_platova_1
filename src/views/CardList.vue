@@ -2,18 +2,11 @@
 import Card from "../components/Card.vue";
 import {ref, computed} from "vue"
 import { onBeforeMount,onUpdated } from 'vue';
-import axios from "axios"
+import {getCardList} from "../services/services"
 
 let cardData =ref([]);
 onBeforeMount(() => {
-  const url = `https://fakestoreapi.com/products`
-  axios.get(url)
-      .then(responce => {
-          cardData.value = responce.data;
-      })
-      .catch(e => {
-          console.log(e)
-      })
+  getCardList(cardData)
 });
 const findText= ref('');
 const findMethod= ref(0);
