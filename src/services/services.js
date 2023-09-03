@@ -1,7 +1,9 @@
 import axios from "axios";
-
-export function getCardList(cardData) {
-    const url = `https://fakestoreapi.com/products`
+import {ref} from "vue";
+export const cards = ref([]);
+getCardList(cards);
+export function getCardList(cardData, id) {
+    const url = `https://fakestoreapi.com/products/`+ (id ? id :'');
     axios.get(url)
         .then(responce => {
             cardData.value = responce.data;
@@ -9,6 +11,12 @@ export function getCardList(cardData) {
         .catch(e => {
             console.log(e)
         })
+}
+export function getCardPrice(id) {
+    return cards.value.find((i)=>{
+        return i.id === id
+    }).price;
+
 }
 export function pushOrder(data, callback) {
     const url = 'https://httpbin.org/post';

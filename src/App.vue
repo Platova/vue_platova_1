@@ -6,7 +6,9 @@ import AppHeader from "./components/AppHeader.vue";
 <template>
   <div id="app">
     <AppHeader />
-    <RouterView />
+    <div style=" padding-top: 5rem;text-align: center;">
+      <RouterView />
+    </div>
   </div>
 </template>
 

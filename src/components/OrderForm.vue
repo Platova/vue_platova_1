@@ -1,5 +1,5 @@
 <template>
-  <div style=" padding-top: 7.5rem;text-align: center;">
+  <div>
     <h1> Добавить заказ </h1>
     <div >
       <Form @submit="addOrder" class="form" :validation-schema="schema"  v-slot="{ meta, errors }">
@@ -68,30 +68,11 @@ const schema = yup.object({
   delivery: yup.string()
 });
 function addOrder(values){
-
   const newOrder =  Object.assign({}, values);
-  //sendData(newOrder);
   pushOrder(newOrder, ()=>{
     alert('Заказ оформлен');
     router.push({name: 'CardList'})
   })
-}
-async function sendData(data){
-  /*const url = 'https://httpbin.org/post';
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    alert('Заказ оформлен');
-    await router.push({name: 'CardList'})
-  } catch (error) {
-    console.error('Ошибка:', error);
-  }*/
-
 }
 </script>
 

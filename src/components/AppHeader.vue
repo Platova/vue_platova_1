@@ -3,12 +3,14 @@
         <nav  class="headerNav">
           <RouterLink to="/" class="headerLink" >Список товаров</RouterLink>
           <RouterLink to="/addCard" class="headerLink">Добавить товар</RouterLink>
-          <RouterLink to="/addOrder" class="headerLink">Форма заказа</RouterLink>
+          <RouterLink to="/cart" class="headerLink">Корзина {{cartProductCount}} </RouterLink>
+
         </nav>
     </header>
 </template>
 
 <script setup>
+  import {cartProductCount} from "../services/globalCart.js";
 </script>
 
 <style scoped>

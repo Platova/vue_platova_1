@@ -3,12 +3,12 @@ import CardList from "../views/CardList.vue";
 import AddCardForm from "../views/AddCardForm.vue";
 import CardInfo from "../views/CardInfo.vue";
 import OrderForm from "../components/OrderForm.vue"
+import CartProductList from "../views/cartProductList.vue";
 const routes = [
     {
         path: '/',
         name: 'CardList',
-        component: CardList,
-        props:true
+        component: CardList
     },
     {
         path: '/addCard',
@@ -24,6 +24,12 @@ const routes = [
         path: '/cards/:id',
         name: "cardInto",
         component: CardInfo
+
+    },
+    {
+        path: '/cart',
+        name: "cart",
+        component: CartProductList
 
     }
 ]

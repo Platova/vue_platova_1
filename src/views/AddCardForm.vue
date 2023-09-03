@@ -1,5 +1,5 @@
 <template>
-  <div style=" padding-top: 7.5rem;text-align: center;">
+  <div>
     <h1 style=""> Добавить товар в список </h1>
     <form id ="addCardF"  @submit="addCard">
         <table class="formTable">

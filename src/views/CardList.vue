@@ -25,8 +25,8 @@ function findCards() {
 </script>
 
 <template>
-  <div style=" padding-top: 7.5rem;text-align: center;">
-    <h1 style=""> Список товаров </h1>
+  <div>
+    <h1 style=""> Список товаров</h1>
       <label>Поиск товаров: </label>
       <input type="text" v-model.trim="findText" @keyup.enter="findCards"/>
       <input type="radio" v-model="findMethod"  value="0" @change ="findCards"/> <label> По наименованию</label>
