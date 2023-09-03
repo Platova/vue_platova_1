@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <RouterLink style=" text-decoration: none;" :to="{name:'cardInto', params: {id: props.carddata.id}}">
+    <RouterLink style="text-decoration: none;" :to="{name:'cardInto', params: {id: props.carddata.id}}">
     <div style="text-align: -webkit-center">
     <div style="height:100px; overflow: hidden">
       <h2>{{props.carddata.title}}</h2>

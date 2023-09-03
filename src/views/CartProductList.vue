@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import CartProduct from "/src/components/catrProduct.vue"
+import CartProduct from "/src/components/CatrProduct.vue"
 import {cartArray, clearCartArray, calcSumm} from "../services/globalCart.js";
 import {computed, ref} from "vue";
 const fullSumm = computed(calcSumm);

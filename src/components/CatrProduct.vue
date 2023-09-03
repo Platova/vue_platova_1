@@ -18,7 +18,7 @@
 <script setup>
 import {getCardList} from "../services/services"
 import {onBeforeMount, ref} from "vue";
-import cartCountButtons from "../components/cartCountButtons.vue"
+import cartCountButtons from "./CartCountButtons.vue"
 import {addDelToCart, dellProductFromCard} from "../services/globalCart.js";
 const props = defineProps({'id':Number, 'count':Number});
 const product = ref({});
