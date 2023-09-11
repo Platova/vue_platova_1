@@ -57,6 +57,7 @@
   import {ref} from 'vue'
   import { useForm } from 'vee-validate';
   import * as yup from 'yup';
+  import {useProductStore} from "../store/ProductStore.js";
 
   function  validateEmail(value) {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -87,12 +88,13 @@
   const transport = ref([]);
   const is_sale = ref('');
 
-  // Submit handler
+  const productStore = useProductStore();
   const addCard = handleSubmit(values => {
     const newCard =  Object.assign({}, values);
     Object.assign(newCard, {'transport': transport.value, 'is_sale': is_sale});
+    productStore.addProduct(newCard)
     alert('Товар добавлен');
-  //  sendData(newCard);
+
   });
 
   const postMethods =[{

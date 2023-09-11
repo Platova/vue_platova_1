@@ -14,10 +14,14 @@ export const useProductStore = defineStore('productStore', () =>{
     function getProductList(){
         return this.products
     }
+    function addProduct(data){
+        data.id = this.products.length + 1;
+        this.products.push(data);
+    }
     async function getProductStore (){
         const res = await fetch(`https://fakestoreapi.com/products/`);
         const data = await res.json();
         this.products = data;
     }
-    return{products,  getProductStore, getProductPrice, findProdById, getProductList}
+    return{products,  getProductStore, getProductPrice, findProdById, getProductList, addProduct}
 })

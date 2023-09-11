@@ -8,6 +8,7 @@ const findMethod= ref(0);
 const storeProduct = useProductStore();
 
 const cardData = computed(storeProduct.getProductList);
+console.log(cardData)
 const cardListFilter = computed(findCards);
 function findCards() {
     if (findText.value === '') {
