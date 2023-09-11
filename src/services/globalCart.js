@@ -1,5 +1,6 @@
 import {computed, ref} from "vue";
 import {getCardList, getCardPrice} from "./services"
+//глобальные переменные заменены на использование стора
 export const cartArray = ref([]);
 export function addDelToCart(id, value) {
     let product = cartArray.value.find((i)=>{

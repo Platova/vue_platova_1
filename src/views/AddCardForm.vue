@@ -58,7 +58,6 @@
   import { useForm } from 'vee-validate';
   import * as yup from 'yup';
 
-
   function  validateEmail(value) {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if (!regex.test(value)) {
@@ -72,7 +71,7 @@
   const { defineInputBinds, handleSubmit, meta, errors } = useForm({
     validationSchema: yup.object({
       title: yup.string().required("Поле обязательно для заполнения"),
-      price: yup.string().required("Поле обязательно для заполнения"),
+      price: yup.number().required("Поле обязательно для заполнения").min(0, 'Цена должна быть больше 0'),
       image: yup.string().required("Поле обязательно для заполнения"),
       description: yup.string().required("Поле обязательно для заполнения"),
       email: yup.string().required("Поле обязательно для заполнения").email("Не корректный email")

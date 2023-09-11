@@ -3,14 +3,41 @@
         <nav  class="headerNav">
           <RouterLink to="/" class="headerLink" >Список товаров</RouterLink>
           <RouterLink to="/addCard" class="headerLink">Добавить товар</RouterLink>
-          <RouterLink to="/cart" class="headerLink">Корзина {{cartProductCount}} </RouterLink>
+          <RouterLink to="/cart" class="headerLink">Корзина {{cartStore.count}} </RouterLink>
+          <div v-if="userStore.isEmpty">
+             <RouterLink :to="{ name: 'login'}" class="headerLink">
+               <button>Войти</button>
+             </RouterLink>
+          </div>
+          <div v-else class="headerLink">
+            {{userStore.user.name}} <button @click="logOutFunc">Выйти</button>
+          </div>
+
 
         </nav>
     </header>
 </template>
 
 <script setup>
-  import {cartProductCount} from "../services/globalCart.js";
+  import {useCartStore} from '../store/CartStore'
+  import {useUserStore} from '../store/UserStore'
+  import {useProductStore} from "../store/ProductStore";
+  import {useRouter} from "vue-router";
+  import {onBeforeMount} from "vue";
+  const cartStore = useCartStore();
+  const userStore = useUserStore();
+  const storeProduct = useProductStore();
+  const router= useRouter()
+  onBeforeMount(() => {
+    storeProduct.getProductStore();
+  })
+  function logOutFunc() {
+    userStore.logOut();
+    localStorage.setItem('token', '');
+    if (router.currentRoute.value.path === '/addCard') {
+      router.push({name: 'CardList'})
+    }
+  }
 </script>
 
 <style scoped>

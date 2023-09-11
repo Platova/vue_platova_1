@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1> Введите данные </h1>
+    <h1> Введите данные{{props}} </h1>
     <div>
       <Form @submit="loginFunc" class="form" :validation-schema="schema"  v-slot="{ meta, errors }">
         <table class="formTable">
@@ -26,18 +26,30 @@
 
 <script setup>
 import { Field, Form, ErrorMessage } from 'vee-validate';
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import * as yup from 'yup';
-import {ref} from "vue";
+import {useUserStore} from '../store/UserStore'
+
 
 const router = useRouter();
+const route = useRoute();
+const props = defineProps({
+  nextPage: String
+});
+
+const userStore = useUserStore();
 const schema = yup.object({
   login: yup.string().trim().required("Поле обязательно для заполнения"),
   password: yup.string().trim().required("Поле обязательно для заполнения")
 });
 function loginFunc(values){
   localStorage.setItem('token', values.login);
-  router.push({name:'OrderForm'});
+  userStore.logIn(values.login);
+  if (route.query.goto === 'AddCard') {
+    router.push({name: 'AddCard'});
+  }else {
+    router.go(-1);
+  }
 }
 </script>
 

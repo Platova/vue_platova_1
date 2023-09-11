@@ -1,15 +1,13 @@
 <script setup>
 import Card from "../components/Card.vue";
 import {ref, computed} from "vue"
-import { onBeforeMount,onUpdated } from 'vue';
-import {getCardList} from "../services/services"
+import {useProductStore} from "../store/ProductStore";
 
-let cardData =ref([]);
-onBeforeMount(() => {
-  getCardList(cardData)
-});
 const findText= ref('');
 const findMethod= ref(0);
+const storeProduct = useProductStore();
+
+const cardData = computed(storeProduct.getProductList);
 const cardListFilter = computed(findCards);
 function findCards() {
     if (findText.value === '') {
@@ -52,7 +50,6 @@ function findCards() {
   grid-auto-rows: auto;
 }
 .cardItem {
-  position: relative;
   cursor: pointer;
 
 }

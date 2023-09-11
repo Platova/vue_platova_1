@@ -18,20 +18,17 @@
 
 <script setup>
   import CartButtons from "../components/CartButtons.vue";
-  import {onBeforeMount,  ref} from "vue";
-  import {addDelToCart, getProductFromCart} from "../services/globalCart.js";
+  import {ref} from "vue";
+  import {useCartStore} from '../store/CartStore'
+  const cartStore = useCartStore();
 
   const props = defineProps({'carddata': Object});
   const cartCount = ref(0);
+  const cartProd = cartStore.getProductFromCart(props.carddata.id);
+  cartCount.value = cartProd ? cartProd.count : 0;
   function changeCartCount(val){
-    cartCount.value += val;
-    addDelToCart(props.carddata.id, val);
+    cartStore.addDelToCart(props.carddata.id, val);
   }
-  onBeforeMount(()=>{
-    const cartProd = getProductFromCart(props.carddata.id);
-    cartCount.value = cartProd ? cartProd.count : 0;
-    //console.log(cartCount.value);
-  })
 </script>
 
 <style scoped>

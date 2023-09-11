@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createMemoryHistory, createRouter, createWebHistory} from 'vue-router'
 import CardList from "../views/CardList.vue";
 import AddCardForm from "../views/AddCardForm.vue";
 import CardInfo from "../views/CardInfo.vue";
@@ -13,7 +13,7 @@ const routes = [
     },
     {
         path: '/addCard',
-        name: 'AddCardForm',
+        name: 'AddCard',
         component: AddCardForm,
         meta: {
             reqAuth: true
@@ -45,13 +45,14 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createMemoryHistory(),
     routes
 })
 router.beforeEach((to, from,next) => {
     if (to.meta.reqAuth && !localStorage.getItem('token')) {
         if (confirm("Для добавления товара необходимо авторизоваться. Перейти на форму авторизации?")) {
-            return next({path: "/login"})
+
+            return next({path: "/login", query:{goto:'AddCard'}})
         }
     } else {
         next();

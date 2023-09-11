@@ -1,10 +1,14 @@
 <template>
   <div class="product">
     <div style="width:100px">
-      <img :src="product.image" style="height:180px;width:150px; overflow: hidden"/>
+      <RouterLink :to="{name:'cardInto', params: {id: props.id}}">
+        <img :src="product.image" style="height:180px;width:150px; overflow: hidden"/>
+      </RouterLink>
     </div>
     <div style="width:700px; padding-top:30px; ">
-      <label style="font-size: 16pt; word-wrap: break-word">{{product.title}}</label>
+      <RouterLink :to="{name:'cardInto', params: {id: props.id}}">
+        <label style="font-size: 16pt; word-wrap: break-word">{{product.title}}</label>
+      </RouterLink>
     </div>
     <div style="width:100px; padding-top:30px">
       {{product.price}}
@@ -19,7 +23,8 @@
 import {getCardList} from "../services/services"
 import {onBeforeMount, ref} from "vue";
 import cartCountButtons from "./CartCountButtons.vue"
-import {addDelToCart, dellProductFromCard} from "../services/globalCart.js";
+import {useCartStore} from '../store/CartStore'
+const cartStore = useCartStore();
 const props = defineProps({'id':Number, 'count':Number});
 const product = ref({});
 const count = props.count;
@@ -29,9 +34,9 @@ onBeforeMount(() => {
 })
 function changeCount(val){
   if (val === 0) {
-    dellProductFromCard(props.id)
+    cartStore.dellProductFromCard(props.id)
   } else {
-    addDelToCart(props.id, val);
+    cartStore.addDelToCart(props.id, val);
   }
 
 }

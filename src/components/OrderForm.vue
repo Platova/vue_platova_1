@@ -2,7 +2,7 @@
   <div>
     <h1> Добавить заказ </h1>
     <div >
-      <Form @submit="addOrder" class="form" :validation-schema="schema"  v-slot="{ meta, errors }">
+      <Form @submit="addOrder" class="form" :validation-schema="schema"  v-slot="{ meta, errors }"  :initial-values="initialValues">
         <table class="formTable">
           <tr>
             <td> ФИО:</td>
@@ -41,6 +41,10 @@
             <td><input v-model="is_check" type="checkbox"/></td>
           </tr>
           <tr>
+            <td>Сохранить данные пользователя</td>
+            <td><input v-model="is_save" type="checkbox"/></td>
+          </tr>
+          <tr>
             <td></td>
             <td> <input type="submit" value="Оформить заказ" :disabled="!meta.valid || !is_check"/> </td>
           </tr>
@@ -56,9 +60,14 @@ import { useRouter } from "vue-router";
 import * as yup from 'yup';
 import {ref} from "vue";
 import {pushOrder} from "../services/services.js";
+import {useUserStore} from '../store/UserStore';
+import {useCartStore} from '../store/CartStore'
+const cartStore = useCartStore();
 
+const userStore = useUserStore();
 const router = useRouter();
 const is_check = ref(false);
+const is_save = ref(false);
 const schema = yup.object({
   email: yup.string().trim().required("Поле обязательно для заполнения").email("Не корректный email"),
   phone: yup.string().trim().required("Поле обязательно для заполнения").matches(/^(\d{6}\d*)$/gm, "Телефон дожен быть больше 6 цифр"),
@@ -67,8 +76,19 @@ const schema = yup.object({
   address: yup.string().trim().required("Поле обязательно для заполнения"),
   delivery: yup.string()
 });
+const initialValues = {
+  email: userStore.user.email,
+  fio: userStore.user.fio,
+  phone: userStore.user.phone,
+  address: userStore.user.address,
+  cardNum: userStore.user.cardNum,
+}
 function addOrder(values){
   const newOrder =  Object.assign({}, values);
+  if (is_save.value){
+    userStore.saveUserInfo(values);
+  }
+  cartStore.clearCartArray();
   pushOrder(newOrder, ()=>{
     alert('Заказ оформлен');
     router.push({name: 'CardList'})
