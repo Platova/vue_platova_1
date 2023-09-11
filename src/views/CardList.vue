@@ -16,7 +16,7 @@ function findCards() {
     } else {
         return cardData.value.filter(t =>
             (+findMethod.value === 1)
-                ? +t.price === +findText.value
+                ? !isNaN(+findText.value) && +t.price === +findText.value
                 : t.title.toLowerCase().search(findText.value.toLowerCase()) > -1
             )
     }
