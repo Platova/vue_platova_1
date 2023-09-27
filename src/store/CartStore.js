@@ -1,5 +1,4 @@
 import {defineStore} from 'pinia'
-import {getCardPrice} from "../services/services.js";
 import {useProductStore} from "../store/ProductStore";
 
 
@@ -50,10 +49,10 @@ export const useCartStore = defineStore('cartStore',{
             this.count = 0;
         },
         getCartSumm() {
-        const storeProduct = useProductStore();
+            const storeProduct = useProductStore();
             let sum = 0;
-            this.cart.forEach(function(item){
-                sum += item.count * +storeProduct.getProductPrice   (item.id);
+            this.cart.forEach(function(item) {
+                sum += item.count * +storeProduct.getProductPrice(item.id);
             })
             return sum.toFixed(2);
        }

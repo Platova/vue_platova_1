@@ -11,10 +11,13 @@ export const useUserStore = defineStore('userStore',{
     },
     actions:{
         logIn(name) {
+            if (typeof (name) !== "string" )
+                return;
             this.user.name = name;
         },
-        saveUserInfo(obj) {debugger;
-            console.log(obj)
+        saveUserInfo(obj) {
+            if (typeof (obj) !== "object")
+                return;
             for (let key in obj) {
                 if (this.user.hasOwnProperty(key)){
                     this.user[key] = obj[key];

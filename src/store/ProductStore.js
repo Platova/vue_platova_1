@@ -1,14 +1,15 @@
 import {defineStore} from 'pinia'
-import {reactive, ref} from "vue";
+import {reactive} from "vue";
 export const useProductStore = defineStore('productStore', () =>{
     const products = reactive([]);
      function findProdById(id) {
          return this.products.find((i) =>{return +i.id === +id})
      };
     function getProductPrice(id) {
-        return  this.products.find((i)=>{
+        let prod = this.products.find((i)=>{
             return i.id === id
-        }).price;
+        })
+        return prod ? prod.price : null;
 
     }
     function getProductList(){
