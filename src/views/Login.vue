@@ -2,7 +2,7 @@
   <div>
     <h1> Введите данные{{props}} </h1>
     <div>
-      <Form @submit="loginFunc" class="form" :validation-schema="schema"  v-slot="{ meta, errors }">
+      <Form @submit="loginFunc" class="form" :validation-schema="schema"  v-slot="{ meta, errors }" test-data="login-form">
         <table class="formTable">
           <tr>
             <td> Логин:</td>
@@ -16,11 +16,14 @@
           </tr>
           <tr>
             <td></td>
-            <td> <input type="submit" value="Войти" :disabled="!meta.valid"/> </td>
+            <td> <button type="submit" value="Войти" :disabled="!meta.valid"/>
+              <!--button name="test-button" @click="loginFunc"/-->
+            </td>
           </tr>
         </table>
       </Form>
     </div>
+
   </div>
 </template>
 
@@ -29,6 +32,7 @@ import { Field, Form, ErrorMessage } from 'vee-validate';
 import { useRouter, useRoute } from "vue-router";
 import * as yup from 'yup';
 import {useUserStore} from '../store/UserStore'
+import {ref} from "vue";
 
 
 const router = useRouter();
@@ -43,6 +47,7 @@ const schema = yup.object({
   password: yup.string().trim().required("Поле обязательно для заполнения")
 });
 function loginFunc(values){
+console.log(123)
   localStorage.setItem('token', values.login);
   userStore.logIn(values.login);
   if (route.query.goto === 'AddCard') {
