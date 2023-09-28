@@ -1,18 +1,18 @@
 <template>
   <div class="card">
-    <RouterLink style="text-decoration: none;" :to="{name:'cardInto', params: {id: props.carddata.id}}">
+    <RouterLink name="rout" style="text-decoration: none;" :to="{name:'cardInto', params: {id: props.carddata.id}}">
     <div style="text-align: -webkit-center">
     <div style="height:100px; overflow: hidden">
-      <h2>{{props.carddata.title}}</h2>
+      <h2 name="title">{{props.carddata.title}}</h2>
     </div>
     <div style="height:300px;width:200px; overflow: hidden">
       <img :src="props.carddata.image" class="cardImage"/>
     </div>
-    <div style="font-size: 25pt">{{props.carddata.price}}</div>
+    <div style="font-size: 25pt" name="price">{{props.carddata.price}}</div>
     <div class="cardDescription">{{props.carddata.description}}</div>
     </div>
     </RouterLink>
-    <CartButtons :count="cartCount" @changeCount="changeCartCount($event)"/>
+    <CartButtons :count="cartCount" @changeCount="changeCartCount($event)" name="cartButtons"/>
   </div>
 </template>
 

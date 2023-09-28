@@ -1,12 +1,12 @@
 <template>
   <div class="product">
     <div style="width:100px">
-      <RouterLink :to="{name:'cardInto', params: {id: props.id}}">
+      <RouterLink :to="{name:'cardInto', params: {id: props.id}}" name="rout1">
         <img :src="product.image" style="height:180px;width:150px; overflow: hidden"/>
       </RouterLink>
     </div>
     <div style="width:700px; padding-top:30px; ">
-      <RouterLink :to="{name:'cardInto', params: {id: props.id}}">
+      <RouterLink :to="{name:'cardInto', params: {id: props.id}}" name="rout2">
         <label style="font-size: 16pt; word-wrap: break-word">{{product.title}}</label>
       </RouterLink>
     </div>
@@ -14,7 +14,7 @@
       {{product.price}}
     </div>
     <div style="width:100px; padding-top:20px">
-      <cartCountButtons :count="count" @changeCount="changeCount($event)"/>
+      <cartCountButtons :count="count" @changeCount="changeCount($event)" :test-data="`buttons-${props.id}`"/>
     </div>
   </div>
 </template>

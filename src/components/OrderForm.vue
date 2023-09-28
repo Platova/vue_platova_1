@@ -2,12 +2,12 @@
   <div>
     <h1> Добавить заказ </h1>
     <div >
-      <Form @submit="addOrder" class="form" :validation-schema="schema"  v-slot="{ meta, errors }"  :initial-values="initialValues">
+      <Form @submit="addOrder" class="form" name="OrderFrom" :validation-schema="schema"  v-slot="{ meta, errors }"  :initial-values="initialValues">
         <table class="formTable">
           <tr>
             <td> ФИО:</td>
             <td> <Field name="fio" :class="{invalid: errors.fio}" />
-              <ErrorMessage name="fio" class="error" /> <br /> </td>
+              <ErrorMessage name="fio_err" class="error" /> <br /> </td>
           </tr>
           <tr>
             <td>Email:</td>
@@ -46,10 +46,11 @@
           </tr>
           <tr>
             <td></td>
-            <td> <input type="submit" value="Оформить заказ" :disabled="!meta.valid || !is_check"/> </td>
+            <td> <input type="submit" value="Оформить заказ" /> </td>
           </tr>
         </table>
       </Form>
+      <button @click="addOrder"  class="buttCount" name="ButtonAdd">+</button>
     </div>
   </div>
 </template>

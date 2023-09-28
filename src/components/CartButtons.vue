@@ -1,12 +1,12 @@
 <template>
   <div v-if="+count === 0">
-    <button @click="addToShopCart"  typeof="button" class="butt">Добавить в корзину</button>
+    <button @click="addToShopCart"  typeof="button" class="butt" name="AddToCart">Добавить в корзину</button>
   </div>
   <div v-else class="groupButton">
-    <div style="padding-right: 10px"><button @click="goToShopCart" class="buttLink">Добавлено в корзину<br/>Перейти</button></div>
-    <button @click="delFromShopCart" class="buttCount">-</button>
+    <div style="padding-right: 10px"><button @click="goToShopCart" name="goToShopCart" class="buttLink">Добавлено в корзину<br/>Перейти</button></div>
+    <button @click="delFromShopCart" class="buttCount" name="ButtonDel">-</button>
     <div style="width: 30px">{{count}}</div>
-    <button @click="addToShopCart"  class="buttCount">+</button>
+    <button @click="addToShopCart"  class="buttCount" name="ButtonAdd">+</button>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ function delFromShopCart(){
   emit('changeCount', -1)
 }
 function goToShopCart(){
-  router.push({name:'cart'})
+  router.push('/cart')
 }
 </script>
 

@@ -1,16 +1,17 @@
 <template>
     <header class="header">
         <nav  class="headerNav">
-          <RouterLink to="/" class="headerLink" >Список товаров</RouterLink>
-          <RouterLink to="/addCard" class="headerLink">Добавить товар</RouterLink>
-          <RouterLink to="/cart" class="headerLink">Корзина {{cartStore.count}} </RouterLink>
+          <RouterLink to="/" class="headerLink" name="routeCardList">Список товаров</RouterLink>
+          <RouterLink to="/addCard" class="headerLink" name="routeAddCard">Добавить товар</RouterLink>
+          <RouterLink to="/cart" class="headerLink" name="routeCart">Корзина {{cartStore.count}} </RouterLink>
           <div v-if="userStore.isEmpty">
-             <RouterLink :to="{ name: 'login'}" class="headerLink">
+             <RouterLink :to="{ name: 'login'}" class="headerLink" name="routeLogIn">
                <button>Войти</button>
              </RouterLink>
           </div>
-          <div v-else class="headerLink">
-            {{userStore.user.name}} <button @click="logOutFunc">Выйти</button>
+          <div v-else class="headerLink" >
+            <div name="divLogin">{{userStore.user.name}}</div>
+            <button @click="logOutFunc" name="buttonLogOut">Выйти</button>
           </div>
 
 

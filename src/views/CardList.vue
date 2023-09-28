@@ -8,7 +8,7 @@ const findMethod= ref(0);
 const storeProduct = useProductStore();
 
 const cardData = computed(storeProduct.getProductList);
-console.log(cardData)
+
 const cardListFilter = computed(findCards);
 function findCards() {
     if (findText.value === '') {
@@ -27,7 +27,7 @@ function findCards() {
   <div>
     <h1 style=""> Список товаров</h1>
       <label>Поиск товаров: </label>
-      <input type="text" v-model.trim="findText" @keyup.enter="findCards"/>
+      <input type="text" v-model.trim="findText" @keyup.enter="findCards" test-data="filterField"/>
       <input type="radio" v-model="findMethod"  value="0" @change ="findCards"/> <label> По наименованию</label>
       <input type="radio" v-model="findMethod"  value="1" @change ="findCards"/> <label> По цене</label>
       <div class="cardsList">

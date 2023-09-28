@@ -1,9 +1,9 @@
 <template>
   <div class="groupButton">
-    <button @click="delFromShopCart" class="buttCount">-</button>
+    <button @click="delFromShopCart" class="buttCount" name="ButtonDel">-</button>
     <div style="width: 30px">{{count}}</div>
-    <button @click="addToShopCart"  class="buttCount">+</button>
-    <div style="padding-right: 10px"><button @click="delAllProdFormCart" class="butt">Удалить</button></div>
+    <button @click="addToShopCart"  class="buttCount" name="ButtonAdd">+</button>
+    <div style="padding-right: 10px"><button @click="delAllProdFormCart" class="butt" name="ButtonDelAll">Удалить</button></div>
   </div>
 </template>
 
