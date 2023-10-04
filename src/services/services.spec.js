@@ -5,26 +5,29 @@ import axios from "axios";
 
 // заглушка для fetch
 global.fetch = vi.fn()
-vi.mock('axios');
-//const axios =require("axios");
+
+vi.mock("axios")
+const usersMock = [{ id: 1 }, { id: 2 }]
+axios.get.mockResolvedValue({
+    data: usersMock
+})
 describe("services", () => {
-
     it("getCardList function", async () => {
-        const cardList = ref({});
-        const users = [{name: 'Bob'}];
-        const resp = {data: users};
-        axios.get.mockResolvedValue(resp);
-     //   await serv.getCardList(cardList);
-       // console.log(cardList.value);
-        //expect(axios).toHaveBeenCalled()
+        const cardList = ref();
+        await serv.getCardList(cardList);
+        expect(axios.get).toHaveBeenCalled()
+        expect(cardList.value).toStrictEqual([{ id: 1 }, { id: 2 }])
     });
-    it("getCardPrice function", () => {
+    it("getCardList function with id", async () => {
+        const cardList = ref();
+        await serv.getCardList(cardList ,121);
+        expect(axios.get).toHaveBeenLastCalledWith('https://fakestoreapi.com/products/121')
+        expect(cardList.value).toStrictEqual([{ id: 1 }, { id: 2 }])
+    });
 
-    });
     it("pushOrder function", () => {
         serv.pushOrder({}, ()=>{});
         expect(fetch).toHaveBeenCalled()
     });
 });
 
-/*НЕ ГОТОВО. не понимаю что не так с axios*/

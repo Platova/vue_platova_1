@@ -1,10 +1,10 @@
 import axios from "axios";
 import {ref} from "vue";
 export const cards = ref([]);
-getCardList(cards);
-export function getCardList(cardData, id) {
+// getCardList(cards);
+export async function getCardList(cardData, id) {
     const url = `https://fakestoreapi.com/products/`+ (id ? id :'');
-    axios.get(url)
+    await axios.get(url)
         .then(responce => {
             cardData.value = responce.data;
         })
