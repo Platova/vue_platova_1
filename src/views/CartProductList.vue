@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div data-testid="CardProductList">
     <h1>Товары в корзине</h1>
-    <div v-if="cartStore.count == 0" test-data="cart-empty">Корзина пуста</div>
+    <div v-if="cartStore.count == 0" data-testid="cart-empty">Корзина пуста</div>
     <div v-else>
       <div v-for="i in cartStore.cart" v-bind:key="i">
-        <CartProduct :id="i.id" :count="i.count"/>
+        <CartProduct :id="i.id" :count="i.count"  :data-testid="`card-${i.id}`"/>
       </div>
       <div style="text-align:center;font-size: 20pt;margin:20px 0; ">
         <label>Итого:</label>
-        <div test-data="price">{{cartStore.getCartSumm()}}</div>
+        <div test-data="price" data-testid="price">{{cartStore.getCartSumm()}}</div>
       </div>
       <div v-if="cartStore.count != 0" style="margin-top: 20px" >
         <RouterLink style="text-decoration: none;" :to="{name:'OrderForm'}" >

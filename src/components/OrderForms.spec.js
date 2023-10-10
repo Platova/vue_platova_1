@@ -45,19 +45,7 @@ describe('OrderForm component', () => {
         const  wrapper = mount(component, {global});
         expect(wrapper.exists()).toBeTruthy();
     })
-    // it('navigation', async () => {
-    //     const push = vi.spyOn(router, 'push');
-    //     const wrapper = mount(component, {global});
-    //     const button = wrapper.find('[name="ButtonAdd"]')
-    //     await button.trigger('click');
-    //     expect(push).toBeCalledWith('/кк');
-    //
-    // })
-    it('validate', async () => {
-
-    })
     it('press addOrder button', async () => {
-         // uses the testing pinia!
         // положили данные в  юсер стор если переменная заполнена
         // не положили если не заполнена
         // отчистили корзину
@@ -65,8 +53,8 @@ describe('OrderForm component', () => {
         const userStore = useUserStore();
         userStore.saveUserInfo({fio:'test', address:'Home 5'})
         const wrapper = mount(component, {global});
-        console.log(wrapper.html())
-        console.log(wrapper.vm)
+       // console.log(wrapper.html())
+      //  console.log(wrapper.vm)
         wrapper.vm.is_save = 1;
         // wrapper.vm.initialValues = {
         //     email: 'test@r.com',
@@ -76,10 +64,10 @@ describe('OrderForm component', () => {
 
         const button = wrapper.find('[value="Оформить заказ"]')
         await button.trigger('click');
-        console.log(button)
+      //  console.log(button)
 
     })
     // проверить что кнопка доступна
 })
 
-/* НЕ ГОТОВО*/
+/* НЕ ГОТОВО. Не подржулились veevalidate и vitest*/

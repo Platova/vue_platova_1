@@ -27,11 +27,11 @@ function findCards() {
   <div>
     <h1 style=""> Список товаров</h1>
       <label>Поиск товаров: </label>
-      <input type="text" v-model.trim="findText" @keyup.enter="findCards" test-data="filterField"/>
-      <input type="radio" v-model="findMethod"  value="0" @change ="findCards"/> <label> По наименованию</label>
-      <input type="radio" v-model="findMethod"  value="1" @change ="findCards"/> <label> По цене</label>
+      <input type="text" v-model.trim="findText" @keyup.enter="findCards" data-testid="filterField"/>
+      <input type="radio" v-model="findMethod"  value="0" @change ="findCards" data-testid="findByText"/> <label> По наименованию</label>
+      <input type="radio" v-model="findMethod"  value="1" @change ="findCards" data-testid="findByPrice"/> <label> По цене</label>
       <div class="cardsList">
-        <div  class="cardItem" v-for="i in cardListFilter" v-bind:key="i">
+        <div  class="cardItem" v-for="i in cardListFilter" v-bind:key="i"  :data-testid="`cardItem-${i.id}`">
           <Card :carddata="i"/>
         </div>
       </div>

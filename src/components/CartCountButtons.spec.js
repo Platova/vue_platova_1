@@ -36,4 +36,3 @@ describe('CartCountButtons component', () => {
         expect(wrapper.emitted().changeCount).toEqual([[0]])
     })
 })
-/*Готово*/

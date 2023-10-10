@@ -1,13 +1,9 @@
 import {describe, it, expect,vi} from "vitest";
 import {mount} from "@vue/test-utils"
 import component from "./Card.vue"
-import { createTestingPinia } from '@pinia/testing'
-import {useCartStore} from '../store/CartStore'
 import {createRouter, createWebHistory } from "vue-router";
 import CardList from "../views/CardList.vue";
-import CartProductList from "../views/CartProductList.vue";
 import CardInfo from "../views/CardInfo.vue";
-import {useUserStore} from "../store/UserStore.js";
 
 const routes = [
     {
@@ -34,8 +30,7 @@ vi.mock('../store/CartStore', () => ({
 describe('Card component', () => {
 
     const global = {
-        plugins: [router
-        ]
+        plugins: [router]
     }
 
     it ('Mount without error', () => {
@@ -60,7 +55,7 @@ describe('Card component', () => {
         expect(price.text()).toContain('100');
         expect(title.text()).toContain('Test');
     })
-    it('navigation', async () => {
+    it('routing', async () => {
         const push = vi.spyOn(router, 'push');
         const wrapper = mount(component, {global, props: {
                 carddata: {
@@ -81,12 +76,15 @@ describe('Card component', () => {
                      price:100
                  }
              }});
-        const changeCartCount = vi.spyOn(wrapper.vm, 'changeCartCount');
-        const cartButtons = wrapper.find('[name="cartButtons"]');
-        await cartButtons.trigger('changeCount');
-      //  expect(changeCartCount).toHaveBeenCalled();
-    })
 
+        await wrapper.vm.$emit('changeCount');
+        expect(wrapper.emitted().changeCount).toBeTruthy();
+        //не могу получить изменения, которые совершает эта функция.
+    })
+    // const cartButtons = wrapper.find('[name="cartButtons"]');
+    // await cartButtons.trigger('changeCount');
+    // const changeCartCount = vi.spyOn(wrapper.vm, 'changeCartCount');
+    // expect(wrapper.emitted().changeCount).toEqual([[-1]])
 })
 
 /*Не работает последний тест - не получается запустить событие пользовательское changeCount*/

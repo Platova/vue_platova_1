@@ -3,7 +3,8 @@
         <nav  class="headerNav">
           <RouterLink to="/" class="headerLink" name="routeCardList">Список товаров</RouterLink>
           <RouterLink to="/addCard" class="headerLink" name="routeAddCard">Добавить товар</RouterLink>
-          <RouterLink to="/cart" class="headerLink" name="routeCart">Корзина {{cartStore.count}} </RouterLink>
+          <RouterLink to="/cart" class="headerLink" name="routeCart">Корзина
+            <div data-testid="cart-counter">{{cartStore.count}}</div> </RouterLink>
           <div v-if="userStore.isEmpty">
              <RouterLink :to="{ name: 'login'}" class="headerLink" name="routeLogIn">
                <button>Войти</button>
@@ -34,6 +35,7 @@
   })
   function logOutFunc() {
     userStore.logOut();
+    console.log(123131)
     localStorage.setItem('token', '');
     if (router.currentRoute.value.path === '/addCard') {
       router.push({name: 'CardList'})

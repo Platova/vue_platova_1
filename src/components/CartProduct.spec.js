@@ -40,6 +40,7 @@ describe('CartProduct component', () => {
         const wrapper = mount(component, {global, props: propsData});
         expect(wrapper.exists()).toBeTruthy();
     })
+
     it('navigation image', async () => {
         const push = vi.spyOn(router, 'push');
         const wrapper = mount(component, {global, props: propsData});
@@ -54,15 +55,8 @@ describe('CartProduct component', () => {
         await rout.trigger('click');
         expect(push).toBeCalledWith({name:"cardInto",  params: {id: 1}});
     })
-    it('show Info', async () => {
-        const wrapper = mount(component, {global, props: propsData});
-        const rout = wrapper.find('[name="rout2"]');
-      // console.log(wrapper.html())
-
-    })
 })
 
 /* 1.Могу ли я проверить загрузку данных на хуки onBeforeMount?
 *  эта функция не запускается даже,  текст не отображается
-2. Проверка запуска функции с опредененным значением
-* changeCount- проверить что отрабатывают нужные функции*/
+*/

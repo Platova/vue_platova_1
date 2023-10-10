@@ -2,12 +2,14 @@
   "name": "vite-project",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "'.cjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "test": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "coverage": "vitest run --coverage",
+    "e2e": "npx playwright test --headed"
   },
   "dependencies": {
     "@vee-validate/rules": "^4.11.3",
@@ -23,6 +25,7 @@
     "vue-resource": "^1.5.3",
     "vue-router": "^4.2.4",
     "vuelidate": "^0.7.7",
+    "wait-for-expect": "^3.0.2",
     "yup": "^1.2.0"
   },
   "devDependencies": {

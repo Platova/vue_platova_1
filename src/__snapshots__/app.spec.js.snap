@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App component > Mount without error 1`] = `
+"<div id=\\"app\\">
+  <app-header-stub></app-header-stub>
+  <div style=\\"padding-top: 5rem; text-align: center;\\">
+    <div></div>
+  </div>
+</div>"
+`;

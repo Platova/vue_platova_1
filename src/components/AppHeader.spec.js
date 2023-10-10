@@ -8,7 +8,6 @@ import CartProductList from "../views/CartProductList.vue";
 import Login from "../views/Login.vue";
 import {createTestingPinia} from "@pinia/testing";
 import {useUserStore} from "../store/UserStore";
-import {createPinia, setActivePinia} from "pinia";
 
 const routes = [
     {
@@ -53,6 +52,8 @@ describe('AppHeader component', () => {
         const wrapper = mount(component, {global});
         expect(wrapper.exists()).toBeTruthy();
     })
+
+    //проверка роутинга
     it('route to CardList', async () => {
         const push = vi.spyOn(router, 'push');
         const wrapper = mount(component, {global});
@@ -74,9 +75,8 @@ describe('AppHeader component', () => {
         await rout.trigger('click');
         expect(push).toBeCalledWith({ "name": "login"});
     })
+    //кнопка войти или выйти в заивисмоти от заполненности стора
     it('show routeLogIn if userStore is empty',  () => {
-        const userStore = useUserStore();
-
         const wrapper = mount(component, {global});
         expect(wrapper.html()).toContain('name="routeLogIn"');
     })
@@ -90,19 +90,7 @@ describe('AppHeader component', () => {
         expect(wrapper.html()).toContain('name="buttonLogOut"');
     })
 
-    it('LogOut function', async () => {
-        const userStore = useUserStore();
-        userStore.user.name='test'
-        localStorage.setItem('token', 'test2');
-        const wrapper = mount(component,  {global});
-        const logout = wrapper.find('[name="buttonLogOut"]');
-        await logout.trigger('click');
-        expect(localStorage.getItem('token')).toBe('');
-       // expect(userStore.user.name).toBe('');
-//НЕ ДО КОНЦА РАБОТАЕТ
-        //expect(wrapper.html()).toContain('name="buttonLogOut"');
-    })
-
+    // При разлогине с окна Добавления товара переходим в окно списка товаров
     it('LogOut function routing from addCard', async () => {
         await router.push("/addCard");
         await router.isReady();
@@ -115,10 +103,24 @@ describe('AppHeader component', () => {
         await logout.trigger('click');
         expect(push).toBeCalledWith({ "name": "CardList"});
     })
+    // при разлогине сбрасывается токен
+    it('LogOut function', async () => {
 
+        const userStore = useUserStore();
+        userStore.user.name='test'
+        localStorage.setItem('token', 'test2');
+        const wrapper = mount(component,  {global});
+        const logout = wrapper.find('[name="buttonLogOut"]');
+        await logout.trigger('click');
+        expect(localStorage.getItem('token')).toBe('');
+
+        //НЕ ДО КОНЦА РАБОТАЕТ, не срабатывают функции стора.
+        // как сделать, чтобы работало?
+        //Либо каким образом написать мок для стора? от наличия логина в сторе зависит отображается
+        // ли кнопка Выйти, которая используется в данном тесте.
+        //expect(userStore.user.name).toBe('');
+        //expect(wrapper.html()).not.toContain('name="buttonLogOut"');
+
+    })
 })
 
-/*как проверить что есть логин? это же функция роутера*/
-/*Если в форме используется несколько сторов, 2 надо закрыть, а один нет?*/
-/* как проверить на onMount дуйствие?*/
-/* Предоследний тест на logOut не срабатывает р*/

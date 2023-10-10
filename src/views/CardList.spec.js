@@ -20,7 +20,7 @@ describe('CardList component', () => {
 
         const wrapper = shallowMount(component);
         wrapper.vm.findMethod = 1;
-        await wrapper.find('[test-data="filterField"]').setValue("5")
+        await wrapper.find('[data-testid="filterField"]').setValue("5")
 
         expect(wrapper.vm.cardListFilter).toHaveLength(2)
     })
@@ -30,7 +30,7 @@ describe('CardList component', () => {
 
         const wrapper = shallowMount(component);
         wrapper.vm.findMethod = 1;
-        await wrapper.find('[test-data="filterField"]').setValue("2dfg")
+        await wrapper.find('[data-testid="filterField"]').setValue("2dfg")
 
         expect(wrapper.vm.cardListFilter).toHaveLength(0)
     })
@@ -40,12 +40,12 @@ describe('CardList component', () => {
 
         const wrapper = shallowMount(component);
         wrapper.vm.findMethod = 0;
-        await wrapper.find('[test-data="filterField"]').setValue("test2")
+        await wrapper.find('[data-testid="filterField"]').setValue("test2")
         expect(wrapper.vm.cardListFilter).toHaveLength(1)
-        await wrapper.find('[test-data="filterField"]').setValue("test")
+        await wrapper.find('[data-testid="filterField"]').setValue("test")
         expect(wrapper.vm.cardListFilter).toHaveLength(2)
         /*поиск идет как like '%filterText% */
-        await wrapper.find('[test-data="filterField"]').setValue("e")
+        await wrapper.find('[data-testid="filterField"]').setValue("e")
         expect(wrapper.vm.cardListFilter).toHaveLength(3)
     })
 })

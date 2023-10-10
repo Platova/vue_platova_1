@@ -60,8 +60,9 @@ describe('CartButtons component', () => {
         expect(wrapper1.emitted().changeCount).toBeTruthy()
     })
     it('press add button', async () => {
-       // const wrapper1 = mount(component, {global});
+        // const wrapper1 = mount(component, {global});
         //await wrapper1.setProps({count:1})
+        //по документации так должно работать, но не работает
         const wrapper1 = mount(component, {global, props: {
                count: 1
            }});

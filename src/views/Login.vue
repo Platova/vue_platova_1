@@ -44,12 +44,12 @@ const props = defineProps({
 const userStore = useUserStore();
 const schema = yup.object({
   login: yup.string().trim().required("Поле обязательно для заполнения"),
-  password: yup.string().trim().required("Поле обязательно для заполнения")
+  password: yup.string().trim().required("Поле обязательно для заполнения").matches(/^(\d{6}\d*)$/gm)
 });
-function loginFunc(values){
+async function loginFunc(values){
 console.log(123)
   localStorage.setItem('token', values.login);
-  userStore.logIn(values.login);
+  await userStore.logIn(values.login);
   if (route.query.goto === 'AddCard') {
     router.push({name: 'AddCard'});
   }else {

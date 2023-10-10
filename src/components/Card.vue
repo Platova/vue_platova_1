@@ -26,7 +26,7 @@
   const cartCount = ref(0);
   const cartProd = cartStore.getProductFromCart(props.carddata.id);
   cartCount.value = cartProd ? cartProd.count : 0;
-  function changeCartCount(val){
+  async function changeCartCount(val) {
     cartStore.addDelToCart(props.carddata.id, val);
   }
 </script>
